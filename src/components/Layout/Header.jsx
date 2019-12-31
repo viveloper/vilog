@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
   toolbarTitle: {
     flex: 1,
+    cursor: 'pointer'
   },
   toolbarSecondary: {
     justifyContent: 'space-between',
@@ -25,6 +26,8 @@ const useStyles = makeStyles(theme => ({
   toolbarLink: {
     padding: theme.spacing(1),
     flexShrink: 0,
+    textTransform: 'capitalize',
+    cursor: 'pointer'
   },
 }));
 
@@ -34,8 +37,17 @@ function Header(props) {
 
   const dispatch = useDispatch();
 
+  const handleClickTitle = () => {
+    props.history.push('/')
+  }
+
   const handleClickLogout = () => {
-    dispatch(logout())
+    dispatch(logout(props.history))
+    props.history.push('/login')
+  }
+
+  const handleClickSectionLink = url => {
+    props.history.push(url)
   }
 
   return (
@@ -49,6 +61,7 @@ function Header(props) {
           align="center"
           noWrap
           className={classes.toolbarTitle}
+          onClick={handleClickTitle}
         >
           {title}
         </Typography>
@@ -62,12 +75,12 @@ function Header(props) {
           <Link
             color="inherit"
             noWrap
-            key={section.title}
+            key={section.name}
             variant="body2"
-            href={section.url}
             className={classes.toolbarLink}
+            onClick={() => handleClickSectionLink(`/section/${section.name}`)}
           >
-            {section.title}
+            {section.name}
           </Link>
         ))}
       </Toolbar>
