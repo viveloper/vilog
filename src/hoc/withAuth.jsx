@@ -11,7 +11,7 @@ function withAuth(WrappedComponent) {
       return <Redirect to="/login" />
     }    
   }
-  EnhancedComponent.displayName = `WithSubscription(${getDisplayName(WrappedComponent)})`;
+  EnhancedComponent.displayName = `withAuth(${getDisplayName(WrappedComponent)})`;  
   return EnhancedComponent
 }
 

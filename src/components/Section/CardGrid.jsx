@@ -27,38 +27,42 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 function CardGrid(props) {
   const classes = useStyles();
+
+  const { posts } = props
+
+  const handleClickView = id => {
+    props.history.push(`${props.history.location.pathname}/post/${id}`)
+  }
 
   return (
     <React.Fragment>
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {cards.map(card => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
+          {posts.map(post => (
+            <Grid item key={post.id} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
-                  image="https://source.unsplash.com/random"
-                  title="Image title"
+                  image={post.image}
+                  title={post.title}
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Heading
-                    </Typography>
+                    {post.title}
+                  </Typography>
                   <Typography>
-                    This is a media card. You can use this section to describe the content.
-                    </Typography>
+                    {post.content}
+                  </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button size="small" color="primary" onClick={() => handleClickView(post.id)}>
                     View
-                    </Button>
+                  </Button>
                   <Button size="small" color="primary">
                     Edit
-                    </Button>
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>

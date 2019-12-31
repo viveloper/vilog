@@ -1,57 +1,75 @@
 const posts = [
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 1,
+    title: 'Title',    
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 2,
+    title: 'Title',
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 3,
+    title: 'Title',
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 4,
+    title: 'Title',
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 5,
+    title: 'Title',
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 6,
+    title: 'Title',
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 7,
+    title: 'Title',
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 8,
+    title: 'Title',
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
   {
-    title: 'title',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
+    id: 9,
+    title: 'Title',
+    content: 'This is a media card. You can use this section to describe the content.',
+    image: 'https://source.unsplash.com/random',
+    author: 'viveloper',
+    created: new Date().toDateString()
   },
 ]
 
@@ -72,9 +90,7 @@ export default {
         resolve({
           post: {
             title: 'title',
-            description: `Something short and leading about the collection below—its contents, the creator, etc.
-            Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-            entirely.`
+            content: 'This is a media card. You can use this section to describe the content.'
           }
         })
       }, 200)

@@ -13,8 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginThunk } from '../store/actions'
 import { Redirect } from 'react-router-dom';
+import { loginThunk } from '../../store/actions'
 
 function Copyright() {
   return (

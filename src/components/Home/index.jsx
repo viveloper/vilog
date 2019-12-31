@@ -8,6 +8,7 @@ import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
 import Main from './Main';
 import Sidebar from './Sidebar';
+import withLayout from '../../hoc/withLayout';
 
 const useStyles = makeStyles(theme => ({
   mainGrid: {
@@ -112,4 +113,4 @@ function Home() {
   );
 }
 
-export default Home
+export default withLayout(Home)

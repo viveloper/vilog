@@ -1,6 +1,18 @@
 const sections = [
   {
+    name: 'programming',
+    description: `Something short and leading about the collection below—its contents, the creator, etc.
+    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
+    entirely.`
+  },
+  {
     name: 'technology',
+    description: `Something short and leading about the collection below—its contents, the creator, etc.
+    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
+    entirely.`
+  },
+  {
+    name: 'photography',
     description: `Something short and leading about the collection below—its contents, the creator, etc.
     Make it short and sweet, but not too short so folks don&apos;t simply skip over it
     entirely.`
@@ -12,7 +24,7 @@ const sections = [
     entirely.`
   },
   {
-    name: 'culture',
+    name: 'food',
     description: `Something short and leading about the collection below—its contents, the creator, etc.
     Make it short and sweet, but not too short so folks don&apos;t simply skip over it
     entirely.`
@@ -22,19 +34,7 @@ const sections = [
     description: `Something short and leading about the collection below—its contents, the creator, etc.
     Make it short and sweet, but not too short so folks don&apos;t simply skip over it
     entirely.`
-  },
-  {
-    name: 'politics',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
-  },
-  {
-    name: 'opinion',
-    description: `Something short and leading about the collection below—its contents, the creator, etc.
-    Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-    entirely.`
-  },
+  },  
   {
     name: 'science',
     description: `Something short and leading about the collection below—its contents, the creator, etc.
