@@ -1,4 +1,5 @@
 import React from 'react'
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Markdown from '../Markdown';
 import withLayout from '../../hoc/withLayout'
@@ -20,9 +21,11 @@ function Post() {
   Material styles. Basic typography, images, and code are all supported.`
 
   return (
-    <Markdown className={classes.markdown} key={post.substring(0, 40)}>
-      {post}
-    </Markdown>
+    <Container maxWidth="lg">
+      <Markdown className={classes.markdown} key={post.substring(0, 40)}>
+        {post}
+      </Markdown>
+    </Container>
   )
 }
 
