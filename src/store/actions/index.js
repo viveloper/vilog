@@ -14,16 +14,30 @@ import {
   FETCH_POSTS_FAILURE,
   FETCH_POST,
   FETCH_POST_SUCCESS,
-  FETCH_POST_FAILURE
+  FETCH_POST_FAILURE,
+  SIGNUP,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE
 } from '../../constants'
 import AuthModel from '../../models/AuthModel'
 import SectionModel from '../../models/SectionModel'
 import PostModel from '../../models/PostModel'
 
-export const loginThunk = (email, password, history) => dispath => {
-  dispath({
-    type: LOGIN
+export const signUpThunk = (firstName, lastName, email, password, history) => dispatch => {
+  dispatch({ type: SIGNUP })
+  AuthModel.signup(firstName, lastName, email, password).then(data => {
+    dispatch({
+      type: SIGNUP_SUCCESS,
+      token: data.token
+    })
+    history.push('/')
+  }).catch(err => {
+    dispatch({type: SIGNUP_FAILURE})
   })
+}
+
+export const loginThunk = (email, password, history) => dispath => {
+  dispath({ type: LOGIN })
   AuthModel.login(email, password).then(res => {
     dispath({
       type: LOGIN_SUCCESS,
@@ -37,9 +51,7 @@ export const loginThunk = (email, password, history) => dispath => {
 }
 
 export const logout = () => {
-  return {
-    type: LOGOUT
-  }
+  return { type: LOGOUT }
 }
 
 export const fetchSectionsThunk = () => dispatch => {

@@ -56,7 +56,7 @@ export default function Login(props) {
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch();
-  const token = useSelector(state => state.token, [])
+  const token = useSelector(state => state.token)
 
   const handleInputChange = e => {
     if (e.target.name === 'email') {
@@ -73,6 +73,11 @@ export default function Login(props) {
   const handleSubmit = e => {
     e.preventDefault()
     dispatch(loginThunk(email, password, props.history))
+  }
+
+  const handleClickMoveToSignUp = e => {
+    e.preventDefault()
+    props.history.push('/signup')
   }
 
   if (token) {
@@ -136,7 +141,7 @@ export default function Login(props) {
                   </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" onClick={handleClickMoveToSignUp}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

@@ -1,3 +1,8 @@
+export const SERVER_BASE_URL = 'http://localhost:5000'
+
+export const SIGNUP = 'SIGNUP'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
 export const LOGIN = 'LOGIN'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
