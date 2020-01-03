@@ -32,20 +32,20 @@ export const signUpThunk = (firstName, lastName, email, password, history) => di
     })
     history.push('/')
   }).catch(err => {
-    dispatch({type: SIGNUP_FAILURE})
+    dispatch({ type: SIGNUP_FAILURE })
   })
 }
 
 export const loginThunk = (email, password, history) => dispath => {
   dispath({ type: LOGIN })
-  AuthModel.login(email, password).then(res => {
+  AuthModel.login(email, password).then(data => {
     dispath({
       type: LOGIN_SUCCESS,
-      token: res.data.token,
+      token: data.token,
     })
     history.push('/')
   }).catch(err => {
-    console.log(err)
+    console.log(err.response.data)
     dispath({ type: LOGIN_FAILURE })
   })
 }

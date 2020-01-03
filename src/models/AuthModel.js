@@ -34,15 +34,19 @@ export default {
   },
 
   login(email, password) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          data: {
-            email: 'test@test.com',
-            token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhc2lvQGNob3ZhLmNvbSIsInVzZXJuYW1lIjoiY2FzaW8iLCJpYXQiOjE1NzQ3NjYzMTcsImV4cCI6MTU3NTM3MTExNywiaXNzIjoidml2ZWxvcGVyLmNvbSIsInN1YiI6InVzZXJJbmZvIn0.JDOMycdDiXdAvIgEP7V3V3tRuiPP8QXPFak35Flm6vk'
-          }
-        })
-      }, 200)
+    return axios.post(`${SERVER_BASE_URL}/auth/login`, {      
+      email,
+      password
+    }).then(res => {
+      return res.data
+    }).catch(error => {
+      if (error.response) {
+        // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+        console.log(error.response.data);
+        // console.log(error.response.status);
+        // console.log(error.response.headers);        
+      }      
+      throw error;
     })
   }
 }
