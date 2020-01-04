@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { loginThunk } from '../../store/actions'
+import { loginThunk, clearReason } from '../../store/actions'
 
 function Copyright() {
   return (
@@ -57,6 +57,7 @@ export default function Login(props) {
 
   const dispatch = useDispatch();
   const token = useSelector(state => state.token)
+  const reason = useSelector(state => state.reason)
 
   const handleInputChange = e => {
     if (e.target.name === 'email') {
@@ -77,6 +78,7 @@ export default function Login(props) {
 
   const handleClickMoveToSignUp = e => {
     e.preventDefault()
+    dispatch(clearReason())
     props.history.push('/signup')
   }
 
@@ -93,7 +95,7 @@ export default function Login(props) {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
-            </Typography>
+          </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
@@ -108,6 +110,7 @@ export default function Login(props) {
               value={email}
               onChange={handleInputChange}
             />
+            {reason.email && <p style={{ color: 'red' }}>{reason.email}</p>}
             <TextField
               variant="outlined"
               margin="normal"
@@ -121,10 +124,12 @@ export default function Login(props) {
               value={password}
               onChange={handleInputChange}
             />
+            {reason.password && <p style={{ color: 'red' }}>{reason.password}</p>}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {reason.general && <p style={{ color: 'red' }}>{reason.general}</p>}
             <Button
               type="submit"
               fullWidth
@@ -133,12 +138,12 @@ export default function Login(props) {
               className={classes.submit}
             >
               Sign In
-              </Button>
+            </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
-                  </Link>
+                </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2" onClick={handleClickMoveToSignUp}>

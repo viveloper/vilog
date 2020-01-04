@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { signUpThunk } from '../../store/actions'
+import { signUpThunk, clearReason } from '../../store/actions'
 
 function Copyright() {
   return (
@@ -53,19 +53,29 @@ export default function SignUp(props) {
   const classes = useStyles();
 
   const token = useSelector(state => state.token)
+  const reason = useSelector(state => state.reason)
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [nickname, setNickname] = useState('')
+
 
   const handleInputChange = e => {
     if (e.target.name === 'email') {
       setEmail(e.target.value)
     }
+    else if (e.target.name === 'nickname') {
+      setNickname(e.target.value)
+    }
     else if (e.target.name === 'password') {
       setPassword(e.target.value)
+    }
+    else if (e.target.name === 'confirmPassword') {
+      setConfirmPassword(e.target.value)
     }
     else if (e.target.name === 'firstName') {
       setFirstName(e.target.value)
@@ -80,11 +90,12 @@ export default function SignUp(props) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    dispatch(signUpThunk(firstName, lastName, email, password, props.history))
+    dispatch(signUpThunk(firstName, lastName, email, nickname, password, confirmPassword, props.history))
   }
 
   const handleClickMoveToLogin = e => {
     e.preventDefault()
+    dispatch(clearReason())
     props.history.push('/login')
   }
 
@@ -117,6 +128,7 @@ export default function SignUp(props) {
                   value={firstName}
                   onChange={handleInputChange}
                 />
+                {reason.firstName && <p style={{color: 'red'}}>{reason.firstName}</p>}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -130,6 +142,7 @@ export default function SignUp(props) {
                   value={lastName}
                   onChange={handleInputChange}
                 />
+                {reason.lastName && <p style={{color: 'red'}}>{reason.lastName}</p>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -143,6 +156,21 @@ export default function SignUp(props) {
                   value={email}
                   onChange={handleInputChange}
                 />
+                {reason.email && <p style={{color: 'red'}}>{reason.email}</p>}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="nickname"
+                  label="Nickname"
+                  name="nickname"
+                  autoComplete="nickname"
+                  value={nickname}
+                  onChange={handleInputChange}
+                />
+                {reason.nickname && <p style={{color: 'red'}}>{reason.nickname}</p>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -157,6 +185,22 @@ export default function SignUp(props) {
                   value={password}
                   onChange={handleInputChange}
                 />
+                {reason.password && <p style={{color: 'red'}}>{reason.password}</p>}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmPassword"
+                  autoComplete="current-password"
+                  value={confirmPassword}
+                  onChange={handleInputChange}
+                />
+                {reason.confirmPassword && <p style={{color: 'red'}}>{reason.confirmPassword}</p>}
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
@@ -165,6 +209,7 @@ export default function SignUp(props) {
                 />
               </Grid>
             </Grid>
+            {reason.general && <p style={{color: 'red', textAlign: 'center'}}>{reason.general}</p>}
             <Button
               type="submit"
               fullWidth

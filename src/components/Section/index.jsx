@@ -4,7 +4,6 @@ import Title from './Title'
 import CardGrid from './CardGrid'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSectionThunk, setSection, fetchPostsThunk } from '../../store/actions';
-import withLayout from '../../hoc/withLayout';
 
 function Board(props) {
   const { sectionName } = props.match.params
@@ -34,4 +33,4 @@ function Board(props) {
   );
 }
 
-export default withLayout(Board)
+export default Board

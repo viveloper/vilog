@@ -5,6 +5,7 @@ import sections from './sections'
 import section from './section'
 import posts from './posts'
 import post from './post'
+import reason from './reason'
 
 const rootReducer = combineReducers({
   token,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   sections,
   section,
   posts,
-  post
+  post,
+  reason
 })
 
 export default rootReducer

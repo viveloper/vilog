@@ -2,7 +2,6 @@ import React from 'react'
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Markdown from '../Markdown';
-import withLayout from '../../hoc/withLayout'
 
 const useStyles = makeStyles(theme => ({
   markdown: {
@@ -29,4 +28,4 @@ function Post() {
   )
 }
 
-export default withLayout(Post)
+export default Post

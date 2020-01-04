@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { SERVER_BASE_URL } from '../constants'
+
 const sections = [
   {
     name: 'programming',
@@ -63,16 +66,20 @@ const sections = [
 
 export default {
   fetchSections() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          sections
-        })
-      }, 200)
-    })
+    return axios.get(`${SERVER_BASE_URL}/api/sections`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    }).then(res => res.data)
   },
 
   fetchSection(name) {
+    // return axios.get(`${SERVER_BASE_URL}/api/sections`, {
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem('token')}`
+    //   }
+    // }).then(res => res.data)
+
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const result = sections.filter(section => section.name===name)
