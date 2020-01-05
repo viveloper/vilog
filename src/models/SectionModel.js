@@ -71,13 +71,5 @@ export default {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     }).then(res => res.data)
-  },
-
-  fetchSection(name) {
-    return axios.get(`${SERVER_BASE_URL}/api/sections/${name}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    }).then(res => res.data)
   }
 }

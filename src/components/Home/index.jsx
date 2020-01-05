@@ -91,6 +91,8 @@ const sidebar = {
 function Home() {
   const classes = useStyles();
 
+  console.log('render home')
+
   return (
     <React.Fragment>
       <MainFeaturedPost post={mainFeaturedPost} />

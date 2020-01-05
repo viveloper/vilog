@@ -1,10 +1,7 @@
-import { FETCH_SECTION_SUCCESS, SET_SECTION } from '../../constants'
+import { SET_SECTION } from '../../constants'
 
 const section = (previousState = {}, action) => {
-  if (action.type === FETCH_SECTION_SUCCESS) {
-    return action.section
-  }
-  else if(action.type === SET_SECTION) {
+  if(action.type === SET_SECTION) {
     return action.section
   }
   else {

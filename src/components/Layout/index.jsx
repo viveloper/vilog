@@ -15,6 +15,8 @@ function Layout(props) {
     return () => { }
   }, [dispatch])
 
+  console.log('render layout')
+
   return (
     <React.Fragment>
       <CssBaseline />

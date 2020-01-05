@@ -5,9 +5,6 @@ import {
   FETCH_SECTIONS,
   FETCH_SECTIONS_SUCCESS,
   FETCH_SECTIONS_FAILURE,
-  FETCH_SECTION,
-  FETCH_SECTION_SUCCESS,
-  FETCH_SECTION_FAILURE,
   SET_SECTION,
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
@@ -101,12 +98,17 @@ export const fetchSectionsThunk = () => dispatch => {
   })
 }
 
-export const fetchSectionThunk = name => dispatch => {
-  dispatch({ type: FETCH_SECTION })
-  SectionModel.fetchSection(name).then(data => {
+export const setSection = section => ({
+  type: SET_SECTION,
+  section
+})
+
+export const fetchPostsThunk = section => dispatch => {
+  dispatch({ type: FETCH_POSTS })
+  PostModel.fetchPosts(section).then(data => {
     dispatch({
-      type: FETCH_SECTION_SUCCESS,
-      section: data.section
+      type: FETCH_POSTS_SUCCESS,
+      posts: data.posts
     })
   }).catch(error => {
     if (error.response) {
@@ -116,37 +118,25 @@ export const fetchSectionThunk = name => dispatch => {
     else {
       console.log(error.message)
     }
-    dispatch({ type: FETCH_SECTION_FAILURE })
-  })
-}
-
-export const setSection = section => ({
-  type: SET_SECTION,
-  section
-})
-
-export const fetchPostsThunk = section => dispatch => {
-  dispatch({ type: FETCH_POSTS })
-  PostModel.fetchPosts(section).then(res => {
-    dispatch({
-      type: FETCH_POSTS_SUCCESS,
-      posts: res.posts
-    })
-  }).catch(err => {
-    console.log(err)
     dispatch({ type: FETCH_POSTS_FAILURE })
   })
 }
 
 export const fetchPostThunk = (section, id) => dispatch => {
   dispatch({ type: FETCH_POST })
-  PostModel.fetchPost(section, id).then(res => {
+  PostModel.fetchPost(section, id).then(data => {
     dispatch({
       type: FETCH_POST_SUCCESS,
-      post: res.post
+      post: data.post
     })
-  }).catch(err => {
-    console.log(err)
+  }).catch(error => {
+    if (error.response) {
+      // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+      console.log(error.response.data)
+    }
+    else {
+      console.log(error.message)
+    }
     dispatch({ type: FETCH_POST_FAILURE })
   })
 }

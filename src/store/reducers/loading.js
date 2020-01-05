@@ -4,10 +4,7 @@ import {
   LOGIN_FAILURE,
   FETCH_SECTIONS,
   FETCH_SECTIONS_SUCCESS,
-  FETCH_SECTIONS_FAILURE,
-  FETCH_SECTION,
-  FETCH_SECTION_SUCCESS,
-  FETCH_SECTION_FAILURE,
+  FETCH_SECTIONS_FAILURE,  
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
@@ -23,8 +20,7 @@ const loading = (previousState = false, action) => {
   switch (action.type) {
     case SIGNUP:
     case LOGIN:
-    case FETCH_SECTIONS:
-    case FETCH_SECTION:
+    case FETCH_SECTIONS:    
     case FETCH_POSTS:
     case FETCH_POST:
       return true
@@ -33,9 +29,7 @@ const loading = (previousState = false, action) => {
     case LOGIN_SUCCESS:
     case LOGIN_FAILURE:
     case FETCH_SECTIONS_SUCCESS:
-    case FETCH_SECTIONS_FAILURE:
-    case FETCH_SECTION_SUCCESS:
-    case FETCH_SECTION_FAILURE:
+    case FETCH_SECTIONS_FAILURE:    
     case FETCH_POSTS_SUCCESS:
     case FETCH_POSTS_FAILURE:
     case FETCH_POST_SUCCESS:

@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import Title from './Title'
 import CardGrid from './CardGrid'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSectionThunk, setSection, fetchPostsThunk } from '../../store/actions';
+import { setSection, fetchPostsThunk } from '../../store/actions';
 
-function Board(props) {
+function Section(props) {
   const { sectionName } = props.match.params
   const dispatch = useDispatch()
   const sections = useSelector(state => state.sections)
@@ -13,17 +13,15 @@ function Board(props) {
   const posts = useSelector(state => state.posts)
 
   useEffect(() => {
-    if (sections.length === 0) {
-      dispatch(fetchSectionThunk(sectionName))
-    } else {
-      const result = sections.filter(section => section.name === sectionName)
-      if (result.length > 0) dispatch(setSection(result[0]))
+    const result = sections.filter(section => section.name === sectionName)
+    if (result.length > 0) {
+      dispatch(setSection(result[0]))
     }
-
     dispatch(fetchPostsThunk(sectionName))
-
     return () => { };
-  }, [sectionName, sections, dispatch])  
+  }, [sectionName, sections, dispatch])
+
+  console.log('render section')
 
   return (
     <React.Fragment>
@@ -33,4 +31,4 @@ function Board(props) {
   );
 }
 
-export default Board
+export default Section

@@ -19,6 +19,8 @@ function Post() {
   This blog post shows a few different types of content that are supported and styled with
   Material styles. Basic typography, images, and code are all supported.`
 
+  console.log('render post')
+
   return (
     <Container maxWidth="lg">
       <Markdown className={classes.markdown} key={post.substring(0, 40)}>
