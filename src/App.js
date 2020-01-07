@@ -6,6 +6,7 @@ import SignUp from './components/SignUp'
 import Login from './components/Login'
 import Section from './components/Section'
 import Post from './components/Post'
+import Write from './components/Write'
 import NotFound from './components/NotFound'
 import store from './store'
 
@@ -18,11 +19,12 @@ function App() {
         <Switch>
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
-          <Layout>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/section/:sectionName" component={Section} />
-            <Route exact path="/section/:sectionName/post/:id" component={Post} />
-          </Layout>
+          {/* -- with Layout */}
+          <Route exact path="/" render={props => <Layout><Home {...props} /></Layout>} />
+          <Route exact path="/section/:sectionName" render={props => <Layout><Section {...props} /></Layout>} />
+          <Route exact path="/section/:sectionName/post/:id" render={props => <Layout><Post {...props} /></Layout>} />
+          {/* with Layout -- */}
+          <Route exact path="/section/:sectionName/write" component={Write} />
           <Route path="" component={NotFound} />
         </Switch>
       </BrowserRouter>

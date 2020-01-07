@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
@@ -15,19 +16,31 @@ const useStyles = makeStyles(theme => ({
   sectionTitle: {
     textTransform: 'capitalize'
   },
-  searchForm: {
+  searchFormContainer: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '50%',
-      minWidth: '200px',
     },
     display: 'flex',
     justifyContent: 'center'
   },
+  writeButtonContainer: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  writeButton: {
+    fontSize: '1.2rem'
+  }
 }));
 
 function Title(props) {
   const classes = useStyles();
+
+  const handleClickWrite = () => {
+    props.history.push(`/section/${props.title}/write`);
+  }
 
   return (
     <React.Fragment>
@@ -40,9 +53,12 @@ function Title(props) {
             {props.description}
           </Typography>
           <div className={classes.heroButtons}>
-            <form className={classes.searchForm} noValidate autoComplete="off">
-              <TextField id="outlined-basic" label="Search" variant="outlined" />
+            <form className={classes.searchFormContainer} noValidate autoComplete="off">
+              <TextField id="outlined-basic" label="Search" variant="outlined" fullWidth />
             </form>
+            <div className={classes.writeButtonContainer}>
+              <Button className={classes.writeButton} variant="contained" fullWidth onClick={handleClickWrite}>Write</Button>
+            </div>
           </div>
         </Container>
       </div>

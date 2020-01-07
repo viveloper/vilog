@@ -25,7 +25,7 @@ function Section(props) {
 
   return (
     <React.Fragment>
-      <Title title={section.name} description={section.description} />
+      <Title title={section.name} description={section.description} history={props.history} />
       <CardGrid posts={posts} history={props.history} />
     </React.Fragment>
   );
