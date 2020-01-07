@@ -13,7 +13,10 @@ import {
   FETCH_POST_FAILURE,
   SIGNUP,
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE
+  SIGNUP_FAILURE,
+  ADD_POST,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE
 } from '../../constants'
 
 const loading = (previousState = false, action) => {
@@ -23,6 +26,7 @@ const loading = (previousState = false, action) => {
     case FETCH_SECTIONS:    
     case FETCH_POSTS:
     case FETCH_POST:
+    case ADD_POST:
       return true
     case SIGNUP_SUCCESS:
     case SIGNUP_FAILURE:
@@ -34,6 +38,8 @@ const loading = (previousState = false, action) => {
     case FETCH_POSTS_FAILURE:
     case FETCH_POST_SUCCESS:
     case FETCH_POST_FAILURE:
+    case ADD_POST_SUCCESS:
+    case ADD_POST_FAILURE:
       return false
     default:
       return previousState

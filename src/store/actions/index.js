@@ -15,7 +15,10 @@ import {
   SIGNUP,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  CLEAR_REASON
+  CLEAR_REASON,
+  ADD_POST,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE
 } from '../../constants'
 import AuthModel from '../../models/AuthModel'
 import SectionModel from '../../models/SectionModel'
@@ -138,6 +141,22 @@ export const fetchPostThunk = (section, id) => dispatch => {
       console.log(error.message)
     }
     dispatch({ type: FETCH_POST_FAILURE })
+  })
+}
+
+export const addPostThunk = (title, content, author, image, section) => dispatch => {
+  dispatch({type: ADD_POST})
+  PostModel.addPost(title, content, author, image, section).then(data => {
+    dispatch({type: ADD_POST_SUCCESS})
+  }).catch(error => {
+    if (error.response) {
+      // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+      console.log(error.response.data)
+    }
+    else {
+      console.log(error.message)
+    }
+    dispatch({ type: ADD_POST_FAILURE })
   })
 }
 

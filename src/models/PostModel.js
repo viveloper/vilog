@@ -16,5 +16,18 @@ export default {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     }).then(res => res.data)
+  },
+
+  addPost(title, content, author, image, section) {
+    return axios.post(`${SERVER_BASE_URL}/api/posts/${section}`, {
+      title,
+      content,
+      author,
+      image
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    }).then(res => res.data)
   }
 }
