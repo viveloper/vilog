@@ -11,6 +11,7 @@ import NotFound from './components/NotFound'
 import store from './store'
 
 import Layout from './components/Layout'
+import Test from './components/Test'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/section/:sectionName/post/:id" render={props => <Layout><Post {...props} /></Layout>} />
           {/* with Layout -- */}
           <Route exact path="/section/:sectionName/write" component={Write} />
+          <Route exact path="/test" component={Test} />
           <Route path="" component={NotFound} />
         </Switch>
       </BrowserRouter>
