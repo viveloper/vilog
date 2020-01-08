@@ -29,7 +29,8 @@ export const signUpThunk = (firstName, lastName, email, nickname, password, conf
   AuthModel.signup(firstName, lastName, email, nickname, password, confirmPassword).then(data => {
     dispatch({
       type: SIGNUP_SUCCESS,
-      token: data.token
+      token: data.token,
+      user: data.user
     })
     history.push('/')
   }).catch(error => {
@@ -57,6 +58,7 @@ export const loginThunk = (email, password, history) => dispatch => {
     dispatch({
       type: LOGIN_SUCCESS,
       token: data.token,
+      user: data.user
     })
     history.push('/')
   }).catch(error => {

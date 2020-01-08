@@ -31,10 +31,6 @@ function InputTitle(props) {
     props.history.goBack()
   }
 
-  const handleClickWrite = () => {
-    console.log('Write')
-  }
-
   return (
     <Paper className={classes.root} elevation={0} square>
       <IconButton aria-label="move to back" onClick={handleClickBack}>
@@ -44,6 +40,7 @@ function InputTitle(props) {
         className={classes.input}
         placeholder="Enter Title"
         inputProps={{ 'aria-label': 'Enter Title' }}
+        onChange={props.onChange}
       />
       <Button
         variant="contained"
@@ -58,7 +55,7 @@ function InputTitle(props) {
         color="default"        
         className={classes.button}
         startIcon={<CreateIcon />}
-        onClick={handleClickWrite}
+        onClick={props.onSubmitClick}
       >
         Write
       </Button>

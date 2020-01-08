@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import token from './token'
+import user from './user'
 import loading from './loading'
 import sections from './sections'
 import section from './section'
@@ -9,6 +10,7 @@ import reason from './reason'
 
 const rootReducer = combineReducers({
   token,
+  user,
   loading,
   sections,
   section,

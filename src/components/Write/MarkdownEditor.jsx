@@ -11,16 +11,14 @@ export default class Demo extends React.Component {
     super(props)
     this.mdParser = new MarkdownIt(/* Markdown-it options */)
   }
-  handleEditorChange({ html, text }) {
-    // console.log('handleEditorChange', html, text)
-  }
+  
   render() {
     return (
       <div style={{ height: '85vh' }}>
         <MdEditor
           value={MOCK_DATA}
           renderHTML={(text) => this.mdParser.render(text)}
-          onChange={this.handleEditorChange}          
+          onChange={this.props.onChange}          
         />
       </div>
     )
