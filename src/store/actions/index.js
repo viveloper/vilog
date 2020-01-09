@@ -24,6 +24,8 @@ import AuthModel from '../../models/AuthModel'
 import SectionModel from '../../models/SectionModel'
 import PostModel from '../../models/PostModel'
 
+import auth from '../../auth';
+
 export const signUpThunk = (firstName, lastName, email, nickname, password, confirmPassword, history) => dispatch => {
   dispatch({ type: SIGNUP })
   AuthModel.signup(firstName, lastName, email, nickname, password, confirmPassword).then(data => {
@@ -54,7 +56,7 @@ export const signUpThunk = (firstName, lastName, email, nickname, password, conf
 
 export const loginThunk = (email, password, history) => dispatch => {
   dispatch({ type: LOGIN })
-  AuthModel.login(email, password).then(data => {
+  auth.login(email, password).then(data => {
     dispatch({
       type: LOGIN_SUCCESS,
       token: data.token,
@@ -78,6 +80,30 @@ export const loginThunk = (email, password, history) => dispatch => {
       })
     }
   })
+  // AuthModel.login(email, password).then(data => {
+  //   dispatch({
+  //     type: LOGIN_SUCCESS,
+  //     token: data.token,
+  //     user: data.user
+  //   })
+  //   history.push('/')
+  // }).catch(error => {
+  //   if (error.response) {
+  //     // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+  //     console.log(error.response.data)
+  //     dispatch({
+  //       type: LOGIN_FAILURE,
+  //       reason: error.response.data
+  //     })
+  //   }
+  //   else {
+  //     console.log(error.message)
+  //     dispatch({
+  //       type: LOGIN_FAILURE,
+  //       reason: { general: error.message }
+  //     })
+  //   }
+  // })
 }
 
 export const logout = () => {

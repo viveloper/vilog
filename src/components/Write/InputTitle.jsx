@@ -48,7 +48,7 @@ function InputTitle(props) {
         className={classes.button}
         startIcon={<ImageIcon />}
       >
-        Upload
+        Upload Main Image
       </Button>
       <Button
         variant="contained"
