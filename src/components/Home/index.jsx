@@ -93,8 +93,6 @@ const sidebar = {
 function Home() {
   const classes = useStyles();
 
-  auth.checkAuth()
-
   console.log('render home')
 
   return (
