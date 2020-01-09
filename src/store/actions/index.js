@@ -63,6 +63,7 @@ export const loginThunk = (email, password, history) => dispatch => {
 }
 
 export const logout = () => {
+  auth.logout();
   return { type: LOGOUT }
 }
 

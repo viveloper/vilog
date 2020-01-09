@@ -42,7 +42,7 @@ function Header(props) {
   }
 
   const handleClickLogout = () => {
-    dispatch(logout(props.history))
+    dispatch(logout())
     props.history.push('/login')
   }
 

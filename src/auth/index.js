@@ -131,5 +131,40 @@ export default {
           }
         }
       });
+  },
+
+  logout() {
+    firebase.auth().signOut();
+  },
+
+  checkAuth() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User is signed in.
+        const displayName = user.displayName;
+        const email = user.email;
+        const emailVerified = user.emailVerified;
+        const photoURL = user.photoURL;
+        const isAnonymous = user.isAnonymous;
+        const uid = user.uid;
+        const providerData = user.providerData;
+        // ...
+        console.log('User is signed in.');
+        console.log({
+          displayName, 
+          email,
+          emailVerified,
+          photoURL,
+          isAnonymous,
+          uid,
+          providerData
+        });
+      }
+      else {
+        // User is signed out.
+        // ...
+        console.log('User is signed out.');
+      }
+    })
   }
 }
