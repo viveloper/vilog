@@ -41,7 +41,7 @@ function CardGrid(props) {
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {posts.map(post => (
-            <Grid item key={post.id} xs={12} sm={6} md={4}>
+            <Grid item key={post.postId} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
@@ -57,7 +57,7 @@ function CardGrid(props) {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary" onClick={() => handleClickView(post.id)}>
+                  <Button size="small" color="primary" onClick={() => handleClickView(post.postId)}>
                     View
                   </Button>
                   <Button size="small" color="primary">

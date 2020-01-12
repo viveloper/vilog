@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -33,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 function Header(props) {
   const classes = useStyles();
-  const { sections, title } = props;
+  const { sections, title } = props;  
 
   const dispatch = useDispatch();
 
@@ -42,8 +41,8 @@ function Header(props) {
   }
 
   const handleClickLogout = () => {
-    dispatch(logout())
-    props.history.push('/login')
+    localStorage.removeItem('token');
+    props.history.push('/login');
   }
 
   const handleClickSectionLink = url => {

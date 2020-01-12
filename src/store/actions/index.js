@@ -21,64 +21,89 @@ import {
   ADD_POST_FAILURE
 } from '../../constants'
 
-import auth from '../../auth';
+import { signup, login, fetchAllSections, fetchPosts } from '../../api'
 import SectionModel from '../../models/SectionModel'
 import PostModel from '../../models/PostModel'
 
 
-export const signUpThunk = (firstName, lastName, email, nickname, password, confirmPassword, history) => dispatch => {
+export const signUpThunk = (email, nickname, password, confirmPassword, history) => dispatch => {
   dispatch({ type: SIGNUP })
-  auth.signup(firstName, lastName, email, nickname, password, confirmPassword).then(data => {
+  signup(email, nickname, password, confirmPassword).then(data => {
     dispatch({
-      type: SIGNUP_SUCCESS,
-      token: data.token,
-      user: data.user
-    })
-    history.push('/')
+      type: SIGNUP_SUCCESS
+    });
+    localStorage.setItem('token', data.token);
+    history.push('/');
   }).catch(error => {
-    console.log(error);
-    dispatch({
-      type: SIGNUP_FAILURE,
-      reason: error
-    })
+    if (error.response) {
+      // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+      console.log(error.response.data);
+      dispatch({
+        type: SIGNUP_FAILURE,
+        reason: error.response.data
+      })
+    }
+    else {
+      // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+      console.log('Error', error.message);
+      dispatch({
+        type: SIGNUP_FAILURE,
+        reason: { general: error.message }
+      })
+    }
   })
 }
 
 export const loginThunk = (email, password, history) => dispatch => {
   dispatch({ type: LOGIN })
-  auth.login(email, password).then(data => {
+  login(email, password).then(data => {
     dispatch({
       type: LOGIN_SUCCESS,
-      token: data.token,
-      user: data.user
-    })
+    });
+    localStorage.setItem('token', data.token);
     history.push('/')
   }).catch(error => {
-    console.log(error);
-    dispatch({
-      type: LOGIN_FAILURE,
-      reason: error
-    })
+    if (error.response) {
+      // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+      console.log(error.response.data);
+      dispatch({
+        type: LOGIN_FAILURE,
+        reason: error.response.data
+      })
+    }
+    else {
+      // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+      console.log('Error', error.message);
+      dispatch({
+        type: LOGIN_FAILURE,
+        reason: { general: error.message }
+      })
+    }
   })
-}
-
-export const logout = () => {
-  auth.logout();
-  return { type: LOGOUT }
 }
 
 export const fetchSectionsThunk = () => dispatch => {
   dispatch({ type: FETCH_SECTIONS })
-  SectionModel.fetchSections().then(data => {
+  fetchAllSections().then(data => {    
     dispatch({
       type: FETCH_SECTIONS_SUCCESS,
       sections: data.sections
     })
   }).catch(error => {
-    console.log(error);
-    dispatch({
-      type: FETCH_SECTIONS_FAILURE,
-    })
+    if (error.response) {
+      // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+      console.log(error.response.data);
+      dispatch({
+        type: FETCH_SECTIONS_FAILURE
+      })
+    }
+    else {
+      // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+      console.log('Error', error.message);
+      dispatch({
+        type: FETCH_SECTIONS_FAILURE
+      })
+    }
   })
 }
 
@@ -89,7 +114,7 @@ export const setSection = section => ({
 
 export const fetchPostsThunk = section => dispatch => {
   dispatch({ type: FETCH_POSTS })
-  PostModel.fetchPosts(section).then(data => {
+  fetchPosts(section).then(data => {
     dispatch({
       type: FETCH_POSTS_SUCCESS,
       posts: data.posts
@@ -100,28 +125,28 @@ export const fetchPostsThunk = section => dispatch => {
   })
 }
 
-export const fetchPostThunk = (section, id) => dispatch => {
-  dispatch({ type: FETCH_POST })
-  PostModel.fetchPost(section, id).then(data => {
-    dispatch({
-      type: FETCH_POST_SUCCESS,
-      post: data.post
-    })
-  }).catch(error => {
-    console.log(error);
-    dispatch({ type: FETCH_POST_FAILURE })
-  })
-}
+// export const fetchPostThunk = (section, id) => dispatch => {
+//   dispatch({ type: FETCH_POST })
+//   PostModel.fetchPost(section, id).then(data => {
+//     dispatch({
+//       type: FETCH_POST_SUCCESS,
+//       post: data.post
+//     })
+//   }).catch(error => {
+//     console.log(error);
+//     dispatch({ type: FETCH_POST_FAILURE })
+//   })
+// }
 
-export const addPostThunk = (title, content, author, image, section) => dispatch => {
-  dispatch({ type: ADD_POST })
-  PostModel.addPost(title, content, author, image, section).then(data => {
-    dispatch({ type: ADD_POST_SUCCESS })
-  }).catch(error => {
-    console.log(error);
-    dispatch({ type: ADD_POST_FAILURE })
-  })
-}
+// export const addPostThunk = (title, content, author, image, section) => dispatch => {
+//   dispatch({ type: ADD_POST })
+//   PostModel.addPost(title, content, author, image, section).then(data => {
+//     dispatch({ type: ADD_POST_SUCCESS })
+//   }).catch(error => {
+//     console.log(error);
+//     dispatch({ type: ADD_POST_FAILURE })
+//   })
+// }
 
 export const clearReason = () => ({
   type: CLEAR_REASON

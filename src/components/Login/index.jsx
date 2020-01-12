@@ -55,8 +55,7 @@ export default function Login(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const dispatch = useDispatch();
-  const token = useSelector(state => state.token)
+  const dispatch = useDispatch();  
   const reason = useSelector(state => state.reason)
 
   const handleInputChange = e => {
@@ -82,7 +81,7 @@ export default function Login(props) {
     props.history.push('/signup')
   }
 
-  if (token) {
+  if (localStorage.getItem('token')) {
     return <Redirect to='/' />
   }
   else {

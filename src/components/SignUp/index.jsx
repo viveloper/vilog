@@ -51,8 +51,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp(props) {
   const classes = useStyles();
-
-  const token = useSelector(state => state.token)
+  
   const reason = useSelector(state => state.reason)
   const dispatch = useDispatch();
 
@@ -90,7 +89,7 @@ export default function SignUp(props) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    dispatch(signUpThunk(firstName, lastName, email, nickname, password, confirmPassword, props.history))
+    dispatch(signUpThunk(email, nickname, password, confirmPassword, props.history))
   }
 
   const handleClickMoveToLogin = e => {
@@ -99,7 +98,7 @@ export default function SignUp(props) {
     props.history.push('/login')
   }
 
-  if (token) {
+  if (localStorage.getItem('token')) {
     return <Redirect to='/' />
   }
   else {
