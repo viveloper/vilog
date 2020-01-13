@@ -57,7 +57,7 @@ function Title(props) {
               <TextField id="outlined-basic" label="Search" variant="outlined" fullWidth />
             </form>
             <div className={classes.writeButtonContainer}>
-              <Button className={classes.writeButton} variant="contained" fullWidth onClick={handleClickWrite}>Write</Button>
+              <Button className={classes.writeButton} variant="contained" color="primary" fullWidth onClick={handleClickWrite}>Write</Button>
             </div>
           </div>
         </Container>

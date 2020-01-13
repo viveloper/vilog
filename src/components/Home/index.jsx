@@ -9,8 +9,6 @@ import FeaturedPost from './FeaturedPost';
 import Main from './Main';
 import Sidebar from './Sidebar';
 
-import auth from '../../auth';
-
 const useStyles = makeStyles(theme => ({
   mainGrid: {
     marginTop: theme.spacing(3),

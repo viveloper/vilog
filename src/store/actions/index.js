@@ -1,7 +1,7 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGIN, LOGOUT,
+  LOGIN,
   FETCH_SECTIONS,
   FETCH_SECTIONS_SUCCESS,
   FETCH_SECTIONS_FAILURE,
@@ -9,9 +9,6 @@ import {
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
-  FETCH_POST,
-  FETCH_POST_SUCCESS,
-  FETCH_POST_FAILURE,
   SIGNUP,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
@@ -22,8 +19,6 @@ import {
 } from '../../constants'
 
 import { signup, login, fetchAllSections, fetchPosts } from '../../api'
-import SectionModel from '../../models/SectionModel'
-import PostModel from '../../models/PostModel'
 
 
 export const signUpThunk = (email, nickname, password, confirmPassword, history) => dispatch => {
