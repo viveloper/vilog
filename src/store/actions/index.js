@@ -9,6 +9,9 @@ import {
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
+  FETCH_POST,
+  FETCH_POST_SUCCESS,
+  FETCH_POST_FAILURE,
   SIGNUP,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
@@ -18,7 +21,7 @@ import {
   ADD_POST_FAILURE
 } from '../../constants'
 
-import { signup, login, fetchAllSections, fetchPosts } from '../../api'
+import { signup, login, fetchAllSections, fetchPosts, fetchPost, addPost } from '../../api'
 
 
 export const signUpThunk = (email, nickname, password, confirmPassword, history) => dispatch => {
@@ -120,28 +123,31 @@ export const fetchPostsThunk = section => dispatch => {
   })
 }
 
-// export const fetchPostThunk = (section, id) => dispatch => {
-//   dispatch({ type: FETCH_POST })
-//   PostModel.fetchPost(section, id).then(data => {
-//     dispatch({
-//       type: FETCH_POST_SUCCESS,
-//       post: data.post
-//     })
-//   }).catch(error => {
-//     console.log(error);
-//     dispatch({ type: FETCH_POST_FAILURE })
-//   })
-// }
+export const fetchPostThunk = postId => dispatch => {
+  console.log('fetchPostThunk');
+  dispatch({ type: FETCH_POST })
+  fetchPost(postId).then(data => {
+    dispatch({
+      type: FETCH_POST_SUCCESS,
+      post: data.post
+    })
+  }).catch(error => {
+    console.log(error);
+    dispatch({ type: FETCH_POST_FAILURE });
+  })
+}
 
-// export const addPostThunk = (title, content, author, image, section) => dispatch => {
-//   dispatch({ type: ADD_POST })
-//   PostModel.addPost(title, content, author, image, section).then(data => {
-//     dispatch({ type: ADD_POST_SUCCESS })
-//   }).catch(error => {
-//     console.log(error);
-//     dispatch({ type: ADD_POST_FAILURE })
-//   })
-// }
+export const addPostThunk = ({title, content, image, section, history}) => dispatch => {
+  dispatch({ type: ADD_POST })
+  addPost(title, content, image, section).then(data => {
+    const postId = data.postId;
+    dispatch({ type: ADD_POST_SUCCESS })
+    history.push(`/section/${section}/posts/${postId}`);
+  }).catch(error => {
+    console.log(error);
+    dispatch({ type: ADD_POST_FAILURE })
+  })
+}
 
 export const clearReason = () => ({
   type: CLEAR_REASON

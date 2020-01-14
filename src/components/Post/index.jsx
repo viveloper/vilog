@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Markdown from '../Markdown';
+import { fetchPostThunk } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   markdown: {
@@ -10,22 +12,34 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Post() {
+function Post(props) {
   const classes = useStyles();
-  const post = `# Sample blog post
+  const postId = props.match.params.id;
+  const post = useSelector(state => state.post);
+  const loading = useSelector(state => state.loading);
+  const dispatch = useDispatch();
 
-  #### April 1, 2020 by [Olivier](/)
-  
-  This blog post shows a few different types of content that are supported and styled with
-  Material styles. Basic typography, images, and code are all supported.`
+  React.useEffect(() => {
+    dispatch(fetchPostThunk(postId));
+  }, [postId, dispatch]);
 
   console.log('render post')
 
   return (
     <Container maxWidth="lg">
-      <Markdown className={classes.markdown} key={post.substring(0, 40)}>
-        {post}
-      </Markdown>
+      {
+        loading || !post.title ?
+          <div>Loading...</div>
+          :
+          <div>
+            <h1>{post.title}</h1>
+            <h4>{`${new Date(post.createdAt).getUTCFullYear()}/${new Date(post.createdAt).getUTCMonth() + 1}/${new Date(post.createdAt).getUTCDate()} by ${post.author}`}</h4>
+            <Markdown className={classes.markdown}>
+              {post.content}
+            </Markdown>
+          </div>
+
+      }
     </Container>
   )
 }

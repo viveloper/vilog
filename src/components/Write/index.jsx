@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux'
+import {useDispatch} from 'react-redux';
 import InputTitle from './InputTitle';
 import MarkdownEditor from './MarkdownEditor';
 import withAuth from '../../hoc/withAuth';
+import {addPostThunk} from '../../store/actions';
 
 const Write = props => {  
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('');
 
-  const user = useSelector(state => state.user)
+  const dispatch = useDispatch();
 
   const handleTitleChange = e => {
     setTitle(e.target.value)
@@ -19,13 +20,13 @@ const Write = props => {
   }
 
   const handleSubmitClick = e => {
-    console.log({
+    const submitData = {
       title,
       content,
-      author: user.nickname,
       image: 'https://source.unsplash.com/random',
       section: props.match.params.sectionName
-    })
+    };
+    dispatch(addPostThunk({...submitData, history: props.history}));
   }
 
   return (

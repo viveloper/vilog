@@ -33,6 +33,30 @@ export const fetchPosts = section => {
   })
 }
 
+export const fetchPost = postId => {
+  return axios.get(`${SERVER_BASE_URL}/posts/${postId}`, {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token')
+    }
+  }).then(res => {
+    return res.data;
+  })
+}
+
+export const addPost = (title, content, image, section) => {
+  return axios.post(`${SERVER_BASE_URL}/${section}/posts`,{
+    title,
+    content,
+    image
+  } ,{
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token')
+    }
+  }).then(res => {
+    return res.data;
+  })
+}
+
 export const getPost = () => {
 
 }

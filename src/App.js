@@ -23,7 +23,7 @@ function App() {
           {/* -- with Layout */}
           <Route exact path="/" render={props => <Layout><Home {...props} /></Layout>} />
           <Route exact path="/section/:sectionName" render={props => <Layout><Section {...props} /></Layout>} />
-          <Route exact path="/section/:sectionName/post/:id" render={props => <Layout><Post {...props} /></Layout>} />
+          <Route exact path="/section/:sectionName/posts/:id" render={props => <Layout><Post {...props} /></Layout>} />
           {/* with Layout -- */}
           <Route exact path="/section/:sectionName/write" component={Write} />
           <Route exact path="/test" component={Test} />
