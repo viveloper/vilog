@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     display: 'flex',
     color: theme.palette.text.secondary,
-    backgroundColor: '#95A3B3'
+    backgroundColor: '#F5F5F5'
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -44,15 +44,15 @@ function InputTitle(props) {
       />
       <Button
         variant="contained"
-        color="default"
+        color="primary"
         className={classes.button}
         startIcon={<ImageIcon />}
       >
-        Upload Main Image
+        Title Image
       </Button>
       <Button
         variant="contained"
-        color="default"        
+        color="primary"        
         className={classes.button}
         startIcon={<CreateIcon />}
         onClick={props.onSubmitClick}

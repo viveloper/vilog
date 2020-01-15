@@ -1,26 +1,29 @@
-'use strict';
-import React from 'react'
-import MdEditor from 'react-markdown-editor-lite'
-import MarkdownIt from 'markdown-it'
+import * as React from "react";
+import ReactMde from "react-mde";
+import * as Showdown from "showdown";
+import "react-mde/lib/styles/css/react-mde-all.css";
 
-// const MOCK_DATA = "Hello.\n\n * This is markdown.\n * It is fun\n * Love it or leave it."
-const MOCK_DATA = ''
-export default class Demo extends React.Component {
-  mdParser = null
-  constructor(props) {
-    super(props)
-    this.mdParser = new MarkdownIt(/* Markdown-it options */)
-  }
-  
-  render() {
-    return (
-      <div style={{ height: '85vh' }}>
-        <MdEditor
-          value={MOCK_DATA}
-          renderHTML={(text) => this.mdParser.render(text)}
-          onChange={this.props.onChange}          
-        />
-      </div>
-    )
-  }
+const converter = new Showdown.Converter({
+  tables: true,
+  simplifiedAutoLink: true,
+  strikethrough: true,
+  tasklists: true
+});
+
+export default function MarkDownEditor(props) {  
+  // const [value, setValue] = React.useState("**Hello world!!!**");
+  const [selectedTab, setSelectedTab] = React.useState("write");
+  return (
+    <div className="container">
+      <ReactMde
+        value={props.content}
+        onChange={props.onChange}
+        selectedTab={selectedTab}
+        onTabChange={setSelectedTab}
+        generateMarkdownPreview={markdown =>
+          Promise.resolve(converter.makeHtml(markdown))
+        }
+      />
+    </div>
+  );
 }

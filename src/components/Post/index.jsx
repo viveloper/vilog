@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import Markdown from '../Markdown';
+// import MarkDownViewer from '../MarkDownViewer';
+import MarkdownView from '../MarkDownViewer/MarkdownView';
 import { fetchPostThunk } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
@@ -34,9 +35,10 @@ function Post(props) {
           <div>
             <h1>{post.title}</h1>
             <h4>{`${new Date(post.createdAt).getUTCFullYear()}/${new Date(post.createdAt).getUTCMonth() + 1}/${new Date(post.createdAt).getUTCDate()} by ${post.author}`}</h4>
-            <Markdown className={classes.markdown}>
+            {/* <MarkDownViewer className={classes.markdown}>
               {post.content}
-            </Markdown>
+            </MarkDownViewer> */}
+            <MarkdownView source={post.content} />
           </div>
 
       }

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {useDispatch} from 'react-redux';
 import InputTitle from './InputTitle';
-import MarkdownEditor from './MarkdownEditor';
+import MarkDownEditor from './MarkDownEditor';
 import withAuth from '../../hoc/withAuth';
 import {addPostThunk} from '../../store/actions';
 
 const Write = props => {  
   const [title, setTitle] = useState('')
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState('## Hello world!!');
 
   const dispatch = useDispatch();
 
@@ -15,11 +15,15 @@ const Write = props => {
     setTitle(e.target.value)
   }
 
-  const handleEditorChange = ({ html, text }) => {
+  const handleEditorChange = (text) => {    
     setContent(text)
   }
 
   const handleSubmitClick = e => {
+    if(!title || !content){
+      alert('Must not be empty.');
+      return;
+    }
     const submitData = {
       title,
       content,
@@ -31,8 +35,8 @@ const Write = props => {
 
   return (
     <div>
-      <InputTitle history={props.history} onChange={handleTitleChange} onSubmitClick={handleSubmitClick} />
-      <MarkdownEditor onChange={handleEditorChange} />
+      <InputTitle history={props.history} onChange={handleTitleChange} onSubmitClick={handleSubmitClick} />      
+      <MarkDownEditor content={content} onChange={handleEditorChange} />
     </div>
   );
 }
