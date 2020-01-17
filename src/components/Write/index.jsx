@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useDispatch} from 'react-redux';
 import InputTitle from './InputTitle';
-import MarkDownEditor from './MarkDownEditor';
+import MarkdownEditor from './MarkdownEditor';
 import withAuth from '../../hoc/withAuth';
 import {addPostThunk} from '../../store/actions';
 
@@ -36,7 +36,7 @@ const Write = props => {
   return (
     <div>
       <InputTitle history={props.history} onChange={handleTitleChange} onSubmitClick={handleSubmitClick} />      
-      <MarkDownEditor content={content} onChange={handleEditorChange} />
+      <MarkdownEditor content={content} onChange={handleEditorChange} />
     </div>
   );
 }

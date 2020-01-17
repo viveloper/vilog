@@ -1,35 +1,44 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 // import MarkDownViewer from '../MarkDownViewer';
 import MarkdownView from '../MarkDownViewer/MarkdownView';
-import { fetchPostThunk } from '../../store/actions';
+import { fetchPost } from '../../api';
 
-const useStyles = makeStyles(theme => ({
-  markdown: {
-    ...theme.typography.body2,
-    padding: theme.spacing(3, 0),
-  },
-}));
+// const useStyles = makeStyles(theme => ({
+//   markdown: {
+//     ...theme.typography.body2,
+//     padding: theme.spacing(3, 0),
+//   },
+// }));
 
 function Post(props) {
-  const classes = useStyles();
+  // const classes = useStyles();
+  const [post, setPost] = React.useState({});
   const postId = props.match.params.id;
-  const post = useSelector(state => state.post);
-  const loading = useSelector(state => state.loading);
-  const dispatch = useDispatch();
+  const posts = useSelector(state => state.posts);
 
   React.useEffect(() => {
-    dispatch(fetchPostThunk(postId));
-  }, [postId, dispatch]);
+    const filterdPosts = posts.filter(post => post.postId === postId);
+    if (filterdPosts.length > 0) {
+      setPost(filterdPosts[0])
+    }
+    else {
+      fetchPost(postId).then(data => {
+        setPost(data.post);
+      }).catch(error => {
+        console.log(error);
+      });
+    }
+  }, [posts, postId]);
 
   console.log('render post')
 
   return (
     <Container maxWidth="lg">
       {
-        loading || !post.title ?
+        !post.title ?
           <div>Loading...</div>
           :
           <div>
@@ -40,7 +49,6 @@ function Post(props) {
             </MarkDownViewer> */}
             <MarkdownView source={post.content} />
           </div>
-
       }
     </Container>
   )

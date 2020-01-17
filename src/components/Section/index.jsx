@@ -3,20 +3,18 @@ import React, { useEffect } from 'react';
 import Title from './Title'
 import CardGrid from './CardGrid'
 import { useDispatch, useSelector } from 'react-redux';
-import { setSection, fetchPostsThunk } from '../../store/actions';
+import { fetchPostsThunk } from '../../store/actions';
 
 function Section(props) {
   const { sectionName } = props.match.params
   const dispatch = useDispatch()
   const sections = useSelector(state => state.sections)
-  const section = useSelector(state => state.section)
   const posts = useSelector(state => state.posts)
 
+  const filteredSections = sections.filter(section => section.name === sectionName);
+  const section = filteredSections.length > 0 ? filteredSections[0] : {};
+
   useEffect(() => {
-    const result = sections.filter(section => section.name === sectionName)
-    if (result.length > 0) {
-      dispatch(setSection(result[0]))
-    }
     dispatch(fetchPostsThunk(sectionName))
     return () => { };
   }, [sectionName, sections, dispatch])

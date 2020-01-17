@@ -105,11 +105,6 @@ export const fetchSectionsThunk = () => dispatch => {
   })
 }
 
-export const setSection = section => ({
-  type: SET_SECTION,
-  section
-})
-
 export const fetchPostsThunk = section => dispatch => {
   dispatch({ type: FETCH_POSTS })
   fetchPosts(section).then(data => {
@@ -123,19 +118,19 @@ export const fetchPostsThunk = section => dispatch => {
   })
 }
 
-export const fetchPostThunk = postId => dispatch => {
-  console.log('fetchPostThunk');
-  dispatch({ type: FETCH_POST })
-  fetchPost(postId).then(data => {
-    dispatch({
-      type: FETCH_POST_SUCCESS,
-      post: data.post
-    })
-  }).catch(error => {
-    console.log(error);
-    dispatch({ type: FETCH_POST_FAILURE });
-  })
-}
+// export const fetchPostThunk = postId => dispatch => {
+//   console.log('fetchPostThunk');
+//   dispatch({ type: FETCH_POST })
+//   fetchPost(postId).then(data => {
+//     dispatch({
+//       type: FETCH_POST_SUCCESS,
+//       post: data.post
+//     })
+//   }).catch(error => {
+//     console.log(error);
+//     dispatch({ type: FETCH_POST_FAILURE });
+//   })
+// }
 
 export const addPostThunk = ({title, content, image, section, history}) => dispatch => {
   dispatch({ type: ADD_POST })

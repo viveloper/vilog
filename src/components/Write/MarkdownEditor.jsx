@@ -10,7 +10,7 @@ const converter = new Showdown.Converter({
   tasklists: true
 });
 
-export default function MarkDownEditor(props) {  
+export default function MarkdownEditor(props) {  
   // const [value, setValue] = React.useState("**Hello world!!!**");
   const [selectedTab, setSelectedTab] = React.useState("write");
   return (
