@@ -9,10 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { logout } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.divider}`
   },
   toolbarTitle: {
     flex: 1,
@@ -20,39 +21,38 @@ const useStyles = makeStyles(theme => ({
   },
   toolbarSecondary: {
     justifyContent: 'space-between',
-    overflowX: 'auto',
+    overflowX: 'auto'
   },
   toolbarLink: {
     padding: theme.spacing(1),
     flexShrink: 0,
     textTransform: 'capitalize',
     cursor: 'pointer'
-  },
+  }
 }));
 
 function Header(props) {
   const classes = useStyles();
-  const { sections, title } = props;  
+  const { sections, title } = props;
 
   const dispatch = useDispatch();
 
   const handleClickTitle = () => {
-    props.history.push('/')
-  }
+    props.history.push('/');
+  };
 
   const handleClickLogout = () => {
-    localStorage.removeItem('token');
-    props.history.push('/login');
-  }
+    dispatch(logout(props.history));
+  };
 
   const handleClickSectionLink = url => {
-    props.history.push(url)
-  }
+    props.history.push(url);
+  };
 
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Subscribe</Button>
+        <Button size="small">logo</Button>
         <Typography
           component="h2"
           variant="h5"
@@ -67,9 +67,15 @@ function Header(props) {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small" onClick={handleClickLogout}>Logout</Button>
+        <Button variant="outlined" size="small" onClick={handleClickLogout}>
+          Logout
+        </Button>
       </Toolbar>
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+      <Toolbar
+        component="nav"
+        variant="dense"
+        className={classes.toolbarSecondary}
+      >
         {sections.map(section => (
           <Link
             color="inherit"
@@ -89,7 +95,7 @@ function Header(props) {
 
 Header.propTypes = {
   sections: PropTypes.array,
-  title: PropTypes.string,
+  title: PropTypes.string
 };
 
-export default withRouter(Header)
+export default withRouter(Header);

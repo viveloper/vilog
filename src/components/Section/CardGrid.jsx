@@ -15,14 +15,15 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
     paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingBottom: theme.spacing(8)
   },
   card: {
-    maxWidth: 345,
+    maxWidth: 345
   },
   media: {
     height: 0,
@@ -33,15 +34,15 @@ const useStyles = makeStyles(theme => ({
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(180deg)'
   },
   avatar: {
-    backgroundColor: red[500],
-  },
+    backgroundColor: red[500]
+  }
 }));
 
 function CardGrid(props) {
@@ -49,9 +50,11 @@ function CardGrid(props) {
 
   const { posts } = props;
 
+  const user = useSelector(state => state.user);
+
   const moveToPost = (sectionName, postId) => {
     props.history.push(`/section/${sectionName}/posts/${postId}`);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -62,20 +65,37 @@ function CardGrid(props) {
               <Card className={classes.card}>
                 <CardHeader
                   avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
+                    <Avatar
+                      aria-label="recipe"
+                      className={classes.avatar}
+                      src={''}
+                    ></Avatar>
                   }
                   title={post.title}
-                  subheader={`${new Date(post.createdAt).getUTCFullYear()}/${new Date(post.createdAt).getUTCMonth() + 1}/${new Date(post.createdAt).getUTCDate()} by ${post.author}`}
+                  subheader={`${new Date(
+                    post.createdAt
+                  ).getUTCFullYear()}/${new Date(post.createdAt).getUTCMonth() +
+                    1}/${new Date(post.createdAt).getUTCDate()} by ${
+                    post.author
+                  }`}
                 />
                 <CardMedia
                   className={classes.media}
                   image={post.image}
                   title="Paella dish"
-                  onClick={()=>{moveToPost(post.section, post.postId)}}
+                  onClick={() => {
+                    moveToPost(post.section, post.postId);
+                  }}
                 />
                 <CardContent>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {`${post.content.substring(0, 200)}${post.content.length > 200 ? ' ...' : ''}`}
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {`${post.content.substring(0, 200)}${
+                      post.content.length > 200 ? ' ...' : ''
+                    }`}
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
@@ -95,4 +115,4 @@ function CardGrid(props) {
   );
 }
 
-export default CardGrid
+export default CardGrid;

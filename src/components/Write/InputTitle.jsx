@@ -17,19 +17,19 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     marginLeft: theme.spacing(1),
-    flex: 1,
-  },    
-  button: {
-    margin: theme.spacing(1),
+    flex: 1
   },
+  button: {
+    margin: theme.spacing(1)
+  }
 }));
 
 function InputTitle(props) {
   const classes = useStyles();
 
   const handleClickBack = () => {
-    props.history.goBack()
-  }
+    props.history.goBack();
+  };
 
   return (
     <Paper className={classes.root} elevation={0} square>
@@ -42,17 +42,27 @@ function InputTitle(props) {
         inputProps={{ 'aria-label': 'Enter Title' }}
         onChange={props.onChange}
       />
+      <input
+        accept="image/*"
+        id="contained-button-file"
+        type="file"
+        style={{ display: 'none' }}
+        onChange={e => props.onTitleImageSelect(e.target.files)}
+      />
+      <label htmlFor="contained-button-file">
+        <Button
+          variant="contained"
+          color="primary"
+          component="span"
+          className={classes.button}
+          startIcon={<ImageIcon />}
+        >
+          Title Image
+        </Button>
+      </label>
       <Button
         variant="contained"
         color="primary"
-        className={classes.button}
-        startIcon={<ImageIcon />}
-      >
-        Title Image
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"        
         className={classes.button}
         startIcon={<CreateIcon />}
         onClick={props.onSubmitClick}
